@@ -1,25 +1,21 @@
-import { Forma } from "../Form/Form";
-import { Contacts } from '../Contacts/Contacts'
-import { Filter } from "../Filter/Filter";
-import { Grid, Title, Box } from "./App.styled";
-import Container from '@mui/material/Container';
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useMainForm } from "hooks/UseMainForm";
+import { Routes, Route } from 'react-router-dom';
+import { MenuAppBar } from "components/AppBar/AppBar";
+import { HomePage } from 'pages/HomePage';
+import { ContactsPage } from 'pages/ConpactsPage/ContactsPage';
+import { RegisterPage } from 'pages/RegisterPage';
+import { LoginPage } from 'pages/LoginPage';
 
 export const App = () => {
-  const { register, handleSubmit, errors, isLoading, onSubmit } = useMainForm();
+  
   return (
-    <Container>
-    <ToastContainer />
-    <Box>
-      <Title>Your phonebook</Title>
-      <Filter />
-    </Box>
-      <Grid>
-        <Forma btnText='Add contact' register={register} handleSubmit={handleSubmit} errors={errors} onSubmit={onSubmit} isLoading={isLoading}/>
-        <Contacts />
-      </Grid>
-    </Container>
+    <Routes>
+      <Route path="/" element={<MenuAppBar/>}>
+        <Route index element={<HomePage />} />
+        <Route path="contacts" element={<ContactsPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage/>} />
+      </Route>
+      <Route path="*" element={<div>No result</div>} />
+    </Routes>
   ) 
 }
