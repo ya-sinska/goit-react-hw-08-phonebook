@@ -53,10 +53,13 @@ export const contactsItemApi = createApi({
       providesTags: ['Items'],
     }),
     updateContact: builder.mutation({
-      query: fields => ({
-        url: `/contacts/${fields.id}`,
-        method: 'PUTCH',
-        data: fields,
+      query: (obj) => ({
+        url: `/contacts/${obj.id}`,
+        method: 'PATCH',
+        data: {
+          name:obj.name,
+          number:obj.number
+        },
       }),
       invalidatesTags: ['Items'],
     }),

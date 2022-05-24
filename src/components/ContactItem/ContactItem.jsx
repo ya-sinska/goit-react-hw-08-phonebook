@@ -8,6 +8,7 @@ import { UseModal } from 'hooks/UseModal';
 
 export const ContactItem = ({ name, number, id}) => { 
     const [deleteContact, { isLoading, isSuccess, isError }] = contactsItemSlice.useDeleteContactsMutation();
+    
     useEffect(() => {
         isSuccess && sucsessDelete();
         isError && errorDelete();

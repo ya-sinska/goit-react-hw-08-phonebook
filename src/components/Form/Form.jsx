@@ -1,11 +1,11 @@
 import { PaperForm, InputField, Label, Error, BtnSubmitForm } from './Form.styled'
-
 // Patterns
 const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 
 // Component Forma
 export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, contact, isLoading}) => {
+  
     return (
         <PaperForm>
             <form
@@ -16,7 +16,7 @@ export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, conta
             <InputField
                 id="name"
                 type="text"
-                defaultValue={contact&&(contact.name)}
+                defaultValue={contact?(contact.name):''}
                 {...register("name", {
                     required: "This is required",
                     minLength: {
@@ -35,7 +35,7 @@ export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, conta
             <InputField
                 id="number"
                 type="tel"
-                defaultValue={contact&&(contact.number)}
+                defaultValue={contact ? (contact.number) : ''}
                 {...register("number", {
                     required: "This is required",
                     maxLength: {
