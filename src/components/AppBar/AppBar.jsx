@@ -4,15 +4,18 @@ import { Navigation } from 'components/Navigation/Navigation';
 import { AuthNav } from 'components/AuthNavigation/AuthNavigation';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { AppContainer } from './AppBar.styled';
+import { useSelector } from 'react-redux';
+import { getIsLoggedIn } from 'redux/authSlice';
 
-export const MenuAppBar =()=> {
+export const MenuAppBar = () => {
+  const isLoggedIn =useSelector(getIsLoggedIn)
   return (
     <>
       <AppBar position="static">
         <AppContainer>
           <Navigation/>
-          <AuthNav />
-          <UserMenu/>
+          {!isLoggedIn ? <AuthNav />:
+          <UserMenu/>}
         </AppContainer>
       </AppBar>
       <Outlet />

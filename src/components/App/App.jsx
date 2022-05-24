@@ -2,8 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import { MenuAppBar } from "components/AppBar/AppBar";
 import { HomePage } from 'pages/HomePage';
 import { ContactsPage } from 'pages/ConpactsPage/ContactsPage';
-import { RegisterPage } from 'pages/RegisterPage';
-import { LoginPage } from 'pages/LoginPage';
+import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
+import { LoginPage } from 'pages/LoginPage/LoginPage';
 
 export const App = () => {
   

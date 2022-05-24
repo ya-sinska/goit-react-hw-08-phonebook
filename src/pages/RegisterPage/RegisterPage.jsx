@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { BtnSubmitForm } from 'components/Form/Form.styled';
-// import { authOperations } from '../redux/auth';
-
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { register } from 'redux/authOperations'; 
+import {RedisterForm,Box,SteledImage,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from './RegisterPage.styled'
 
 export const RegisterPage = ()=>{
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,17 +38,24 @@ export const RegisterPage = ()=>{
   };
   const handleSubmit = e => {
     e.preventDefault();
-    // dispatch(authOperations.register({ name, email, password }));
+    dispatch(register({ name, email, password }));
     setName('');
     setEmail('');
     setPassword('');
   };
 
   return (
-    <div>
-      <h1>Let's start registration</h1>
-      <form onSubmit={handleSubmit} autoComplete="off">
-          <TextField 
+    <FormContainer>
+      <SteledImage></SteledImage>
+      <Box>
+      <FormTitle>
+        <LogIcon>
+          <VpnKeyIcon/>
+        </LogIcon>
+        <TitleText>Let's start registration</TitleText>
+      </FormTitle>
+      <RedisterForm onSubmit={handleSubmit} autoComplete="off">
+          <Fields 
             id="name"
             label="Name"
             variant="outlined"
@@ -59,7 +64,7 @@ export const RegisterPage = ()=>{
             name="name"
             value={name}
             onChange={handleChange} />
-          <TextField
+          <Fields
               id="email"
               label="Email"
               variant="outlined"
@@ -68,7 +73,7 @@ export const RegisterPage = ()=>{
               name="email"
               value={email}
               onChange={handleChange}/>
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+            <PasswordField sx={{ m: 1}} variant="outlined">
                 <InputLabel htmlFor="password">Password</InputLabel>
                     <OutlinedInput
                         id="password"
@@ -90,9 +95,10 @@ export const RegisterPage = ()=>{
                         }
                         label="Password"
                     />
-              </FormControl>
-        <BtnSubmitForm variant="contained" type="submit">Register</BtnSubmitForm>
-      </form>
-    </div>
+              </PasswordField>
+        <Btn variant="contained" type="submit">Register</Btn>
+      </RedisterForm>
+      </Box>
+    </FormContainer>
   );
 }
