@@ -1,21 +1,40 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
+import { createApi} from '@reduxjs/toolkit/query/react'
+import axios from 'axios';
+const axiosBaseQuery =
+  ({ baseUrl } = { baseUrl: '' }) =>
+  async ({ url, method, data, params }) => {
+    try {
+      const result = await axios({ url: baseUrl + url, method, data, params })
+      return { data: result.data }
+    } catch (axiosError) {
+      let err = axiosError
+      return {
+        error: {
+          status: err.response?.status,
+          data: err.response?.data || err.message,
+        },
+      }
+    }
+  }
 export const contactsItemApi = createApi({
   reducerPath: 'items',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://62829a3638279cef71ca32ce.mockapi.io'
+    baseQuery: axiosBaseQuery({
+        baseUrl: 'https://connections-api.herokuapp.com'
     }),
   tagTypes:['Items'],
   endpoints: (builder) => ({
     getContacts: builder.query({
-        query: () => '/contacts',
+      query: () => ({
+        url: '/contacts',
+        method: 'get'
+      }),
         providesTags:['Items'],
     }),
     addContacts: builder.mutation({
         query: (values) => ({
         url: '/contacts',
         method: 'POST',
-        body: values,
+        data: values,
       }),
         invalidatesTags:['Items'],
     }),
@@ -27,14 +46,17 @@ export const contactsItemApi = createApi({
         invalidatesTags:['Items'],
     }),
     getContactsById: builder.query({
-      query: id => `/contacts/${id}`,
+      query: id => ({
+        url: `/contacts/${id}`,
+        method: 'get'
+      }),
       providesTags: ['Items'],
     }),
     updateContact: builder.mutation({
       query: fields => ({
         url: `/contacts/${fields.id}`,
-        method: 'PUT',
-        body: fields,
+        method: 'PUTCH',
+        data: fields,
       }),
       invalidatesTags: ['Items'],
     }),
@@ -42,5 +64,3 @@ export const contactsItemApi = createApi({
 })
 
 export const {useUpdateContactMutation, useGetContactsByIdQuery, useGetContactsQuery, useAddContactsMutation, useDeleteContactsMutation} = contactsItemApi;
-// Selectors
-// export const getItemsValue = (state) => state.items.value;

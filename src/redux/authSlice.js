@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login, logout, register } from './authOperations';
+
 // Slice Auth
 const initialState = { 
     user: {
@@ -32,7 +33,6 @@ export const authSlice = createSlice({
 
     }
 })
-// export const { addFilter } = contactsFilterSlice.actions;
 
 // Selectors
 export const getIsLoggedIn = (state) => state.auth.isLoggedIn;

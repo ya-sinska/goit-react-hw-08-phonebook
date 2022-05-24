@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com'
+// Add headers autorization with token
 const token = {
     set(token) {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`
@@ -10,6 +11,7 @@ const token = {
         axios.defaults.headers.common.Authorization = ''
     }
 }
+// operations
 export const register = createAsyncThunk('auth/register', async credentials => {
     try {
         const { data } = await axios.post('/users/signup', credentials);
