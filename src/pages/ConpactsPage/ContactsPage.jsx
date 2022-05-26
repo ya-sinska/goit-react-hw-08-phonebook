@@ -5,7 +5,7 @@ import { Grid, Title, Box } from "./ContactsPage.styled";
 import Container from '@mui/material/Container';
 import { useMainForm } from "hooks/UseMainForm";
 
-export const ContactsPage = () => {
+export default function ContactsPage () {
     const { register, handleSubmit, errors, isLoading, onSubmit } = useMainForm();
     return (
         <Container>

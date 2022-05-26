@@ -10,10 +10,10 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { login} from 'redux/authOperations'; 
 import {RedisterForm,Box,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from '../RegisterPage/RegisterPage.styled'
 import { SteledImage } from './LoginPage.styled';
-import { getError, getIsLoggedIn, getLoading } from 'redux/authSlice';
+import { getError, getLoading } from 'redux/authSlice';
 import { errorRegistration } from 'utils/notification';
 
-export const LoginPage = ()=>{
+export default function LoginPage () {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,13 +21,11 @@ export const LoginPage = ()=>{
   const error = useSelector(getError);
   const loading = useSelector(getLoading);
 
-  useEffect(() => {
-    if (error !== null) {
+    useEffect(() => {
+      if (error !== null) {
       errorRegistration(error);
-      return
-    };
-  
-  }, [error])
+      };
+    }, [error]);
   
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {

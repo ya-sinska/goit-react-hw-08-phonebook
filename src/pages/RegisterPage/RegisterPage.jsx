@@ -13,7 +13,7 @@ import { getError, getLoading } from 'redux/authSlice';
 import { errorRegistration } from 'utils/notification';
 
 
-export const RegisterPage = ()=>{
+export default function RegisterPage () {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -23,11 +23,12 @@ export const RegisterPage = ()=>{
   const loading = useSelector(getLoading);
 
   useEffect(() => {
+      console.log(error)
     if (error !== null) {
       errorRegistration(error);
-      return
     };
-   }, [error])
+      
+  }, [error]);
   
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
