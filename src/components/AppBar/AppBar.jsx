@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/authSlice';
 
 export const MenuAppBar = () => {
-  const isLoggedIn =useSelector(getIsLoggedIn)
+  const isLoggedIn = useSelector(getIsLoggedIn)
+  
   return (
     <>
       <AppBar position="static">

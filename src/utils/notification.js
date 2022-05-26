@@ -5,4 +5,5 @@ export const errorAdd = () => toast.error("Sorry your contact didn't save! Try a
 export const sucsessDelete = () => toast.info(`Contact delete!`, { autoClose: 1000 });
 export const errorDelete = () => toast.error("Sorry your contact didn't DELETE! Try again", { autoClose: 1000 });
 export const sucsessEdit = () => toast.info(`Contact Edit SUCSESS!`, { autoClose: 1000 });
-export const errorEdit =() => toast.error("Sorry! Try again", { autoClose: 1000 });
+export const errorEdit = () => toast.error("Sorry! Try again", { autoClose: 1000 });
+export const errorRegistration =(message) => toast.error(message, { autoClose: 3000 });

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,12 +10,25 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { login} from 'redux/authOperations'; 
 import {RedisterForm,Box,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from '../RegisterPage/RegisterPage.styled'
 import { SteledImage } from './LoginPage.styled';
+import { getError, getIsLoggedIn, getLoading } from 'redux/authSlice';
+import { errorRegistration } from 'utils/notification';
+
 export const LoginPage = ()=>{
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-    
+  const error = useSelector(getError);
+  const loading = useSelector(getLoading);
+
+  useEffect(() => {
+    if (error !== null) {
+      errorRegistration(error);
+      return
+    };
+  
+  }, [error])
+  
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'email':
@@ -83,7 +96,7 @@ export const LoginPage = ()=>{
                         label="Password"
                     />
               </PasswordField>
-        <Btn variant="contained" type="submit">LogIn</Btn>
+        <Btn disabled={loading} variant="contained" type="submit">LogIn</Btn>
       </RedisterForm>
       </Box>
     </FormContainer>

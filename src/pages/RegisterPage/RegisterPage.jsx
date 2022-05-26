@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {  useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,6 +9,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { register } from 'redux/authOperations'; 
 import {RedisterForm,Box,SteledImage,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from './RegisterPage.styled'
+import { getError, getLoading } from 'redux/authSlice';
+import { errorRegistration } from 'utils/notification';
+
 
 export const RegisterPage = ()=>{
   const dispatch = useDispatch();
@@ -16,7 +19,16 @@ export const RegisterPage = ()=>{
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-    
+  const error = useSelector(getError);
+  const loading = useSelector(getLoading);
+
+  useEffect(() => {
+    if (error !== null) {
+      errorRegistration(error);
+      return
+    };
+   }, [error])
+  
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'name':
@@ -36,12 +48,12 @@ export const RegisterPage = ()=>{
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     dispatch(register({ name, email, password }));
     setName('');
     setEmail('');
-    setPassword('');
+    setPassword('');   
   };
 
   return (
@@ -96,7 +108,7 @@ export const RegisterPage = ()=>{
                         label="Password"
                     />
               </PasswordField>
-        <Btn variant="contained" type="submit">Register</Btn>
+        <Btn disabled={loading} variant="contained" type="submit">Register</Btn>
       </RedisterForm>
       </Box>
     </FormContainer>
