@@ -4,7 +4,7 @@ import { contactsItemSlice } from '../../redux';
 import { useEffect} from "react";
 import { sucsessDelete, errorDelete } from "utils/notification";
 import { Modal } from 'components/Modal/Modal';
-import { useModal } from 'hooks/UseModal';
+import { useModal } from '../../hooks/useModal';
 
 export const ContactItem = ({ name, number, id}) => { 
     const [deleteContact, { isLoading, isSuccess, isError }] = contactsItemSlice.useDeleteContactsMutation();
