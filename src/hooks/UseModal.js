@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const UseModal = () => {
+export const useModal = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => {
         setModalOpen(prevState => !prevState);

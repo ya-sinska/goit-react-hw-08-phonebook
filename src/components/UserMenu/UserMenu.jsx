@@ -16,7 +16,7 @@ export const UserMenu = () => {
       </Image>
       <UserName>{`Hello, ${name.toUpperCase()}`}</UserName>
       <Button variant="contained" type="button" onClick={() => {dispatch(logout())}}>
-        LogOut
+        Log Out
       </Button>
     </Box>
   );
