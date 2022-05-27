@@ -36,5 +36,4 @@ export const Modal = ({ onClose, id}) => {
 Modal.propTypes = {
   onClose: PropTypes.func,
   id: PropTypes.string,
-  isModalOpen: PropTypes.bool,
 }
