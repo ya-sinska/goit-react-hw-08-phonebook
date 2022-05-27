@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Overlay, ModalBox, CloseBtn } from "./Modal.styled"
 import { createPortal } from 'react-dom';
 import { Forma } from 'components/Form/Form';
-import { useModalForm } from 'hooks/useModalForm';
+import { useModalFormControl } from 'hooks/useModalFormControl';
 import CloseIcon from '@mui/icons-material/Close';
 
 const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({ onClose, id}) => {
- const {register, handleSubmit, errors, onSubmit, contact, isLoading}= useModalForm( onClose, id)
+ const {register, handleSubmit, errors, onSubmit, contact, isLoading}= useModalFormControl( onClose, id)
   useEffect(() => {
    const handleKeyDown = e => {
      if (e.code === 'Escape') {

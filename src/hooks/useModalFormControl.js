@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from 'react';
 
 
-export const useModalForm = (onClose, id) => {
+export const useModalFormControl = (onClose, id) => {
   const { data: contacts } = useGetContactsQuery();
   const contact = contacts.find(cont => cont.id === id);
   const [updateContact, { isLoading, isSuccess, isError }] = useUpdateContactMutation();
