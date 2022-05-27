@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Overlay, ModalBox, CloseBtn } from "./Modal.styled"
 import { createPortal } from 'react-dom';
 import { Forma } from 'components/Form/Form';
-import { useModalForm } from 'hooks/UseModalForm';
+import { useModalForm } from 'hooks/useModalForm';
 import CloseIcon from '@mui/icons-material/Close';
 
 const modalRoot = document.querySelector('#modal-root');

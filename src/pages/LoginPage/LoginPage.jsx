@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,49 +5,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { login} from 'redux/authOperations'; 
 import {RedisterForm,Box,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from '../RegisterPage/RegisterPage.styled'
 import { SteledImage } from './LoginPage.styled';
-import { getError, getLoading } from 'redux/authSlice';
-import { errorRegistration } from 'utils/notification';
+import { useLoginPage } from 'hooks/useLoginPage';
 
 export default function LoginPage () {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const error = useSelector(getError);
-  const loading = useSelector(getLoading);
-
-    useEffect(() => {
-      if (error !== null) {
-      errorRegistration(error);
-      };
-    }, [error]);
-  
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
-    const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(login({  email, password }));
-    setEmail('');
-    setPassword('');
-  };
+  const { email, showPassword, password, loading, handleChange, handleClickShowPassword, handleMouseDownPassword, handleSubmit } = useLoginPage();
 
   return (
     <FormContainer>

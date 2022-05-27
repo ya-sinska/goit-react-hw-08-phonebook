@@ -8,6 +8,7 @@ import { Loader } from 'components/Loader/Loader';
 import PrivatRoute from 'components/PrivatRoute/PrivatRoute';
 import PublicRoute from 'components/PublicRoute/PublicRoute';
 import { getIsRefreshing } from 'redux/authSlice';
+import { Page404 } from 'components/Page404/Page404';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage' /* webpackChunkName: "HomePage"*/));
 const ContactsPage  = lazy(() => import('pages/ConpactsPage/ContactsPage' /* webpackChunkName: "ContactsPage"*/));
@@ -34,7 +35,7 @@ export const App = () => {
               <Route path="register" element={<PublicRoute restricted>{<RegisterPage />}</PublicRoute>} />
               <Route path="login" element={<PublicRoute restricted>{<LoginPage/>}</PublicRoute>}/>
             </Route>
-            <Route path="*" element={<div>No result</div>} />
+            <Route path="*" element={<Page404/>} />
           </Routes>
         </Suspense>
       </>

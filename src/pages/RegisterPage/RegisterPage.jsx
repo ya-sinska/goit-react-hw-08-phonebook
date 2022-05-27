@@ -1,5 +1,3 @@
-import {  useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,56 +5,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { register } from 'redux/authOperations'; 
 import {RedisterForm,Box,SteledImage,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from './RegisterPage.styled'
-import { getError, getLoading } from 'redux/authSlice';
-import { errorRegistration } from 'utils/notification';
+import { useRegisterPage } from 'hooks/useRegisterPage';
 
-
-export default function RegisterPage () {
-  const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const error = useSelector(getError);
-  const loading = useSelector(getLoading);
-
-  useEffect(() => {
-      console.log(error)
-    if (error !== null) {
-      errorRegistration(error);
-    };
-      
-  }, [error]);
-  
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        return setName(value);
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
-    const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-  const handleSubmit = async e => {
-    e.preventDefault();
-    dispatch(register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');   
-  };
-
+export default function RegisterPage() {
+  const {name, email, password, showPassword, loading, handleSubmit, handleClickShowPassword, handleMouseDownPassword, handleChange} = useRegisterPage();
   return (
     <FormContainer>
       <SteledImage></SteledImage>

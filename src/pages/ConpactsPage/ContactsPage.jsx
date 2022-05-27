@@ -3,10 +3,10 @@ import { Contacts } from '../../components/Contacts/Contacts'
 import { Filter } from "../../components/Filter/Filter";
 import { Grid, Title, Box } from "./ContactsPage.styled";
 import Container from '@mui/material/Container';
-import { useMainForm } from "hooks/UseMainForm";
+import { useAddContactForm } from "hooks/useAddContactForm";
 
 export default function ContactsPage () {
-    const { register, handleSubmit, errors, isLoading, onSubmit } = useMainForm();
+    const { register, handleSubmit, errors, isLoading, onSubmit } = useAddContactForm();
     return (
         <Container>
             <Box>

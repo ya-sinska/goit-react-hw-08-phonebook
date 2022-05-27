@@ -17,6 +17,11 @@ const initialState = {
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
+    reducers: {
+      resetError: (state) => {
+      state.error = null
+    },  
+    },
     extraReducers: {
         [register.pending](state) {
             state.loading = true;
@@ -89,3 +94,5 @@ export const getUserName = (state) => state.auth.user.name;
 export const getLoading = (state) => state.auth.loading;
 export const getError = (state) => state.auth.error;
 export const getIsRefreshing = (state) => state.auth.isRefreshing;
+
+export const { resetError} = authSlice.actions

@@ -4,4 +4,6 @@ export const AppContainer = styled(Container)`
 display: flex;
 justify-content: space-around;
 padding: 15px 0;
+background-color: #d6e4ee;
 `
+

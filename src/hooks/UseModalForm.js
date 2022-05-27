@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 export const useModalForm = (onClose, id) => {
   const { data: contacts } = useGetContactsQuery();
   const contact = contacts.find(cont => cont.id === id);
-  // console.log(contact)
   const [updateContact, { isLoading, isSuccess, isError }] = useUpdateContactMutation();
   useEffect(() => {
         isSuccess && sucsessEdit();
@@ -16,8 +15,6 @@ export const useModalForm = (onClose, id) => {
     const onSubmit = async fields => {
     try {
       await updateContact({id:contact.id, ...fields});
-      console.log({id:contact.id, ...fields})
-      // console.log(fields)
       onClose();
     } catch (error) {
       console.log(error);

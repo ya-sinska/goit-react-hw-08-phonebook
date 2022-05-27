@@ -1,12 +1,13 @@
-import { useChange } from 'hooks';
+import { useChangeFilter } from 'hooks/useChangeFilter';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import { useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/contactsFilterSlice';
+
 export const Filter = () => {
    const filter =useSelector(getFilterValue)
-    const change = useChange.useChange();
+    const change = useChangeFilter();
  return (
 
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>

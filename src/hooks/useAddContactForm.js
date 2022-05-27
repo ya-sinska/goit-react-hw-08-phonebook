@@ -3,7 +3,7 @@ import { useGetContactsQuery } from "redux/contactsItemSlice";
 import { useEffect } from "react";
 import { notify, sucsessAdd,errorAdd } from "utils/notification";
 import { useForm } from "react-hook-form";
-export const useMainForm = () => {
+export const useAddContactForm = () => {
      const { register, reset, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             name:'',
