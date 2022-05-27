@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { PaperForm, InputField, Label, Error, BtnSubmitForm } from './Form.styled'
 // Patterns
 const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -5,7 +6,7 @@ const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-я
 
 // Component Forma
 export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, contact, isLoading}) => {
-  
+
     return (
         <PaperForm>
             <form
@@ -54,4 +55,13 @@ export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, conta
             </form>
         </PaperForm>
     )
+}
+Forma.propTypes = {
+    btnText: PropTypes.string.isRequired,
+    register: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    errors:PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    contact: PropTypes.object,
+    isLoading:PropTypes.bool.isRequired,
 }
