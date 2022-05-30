@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FormControl, TextField } from "@mui/material";
+import { FormControl} from "@mui/material";
 import { Container } from "@mui/system";
 import { BtnSubmitForm } from "components/Form/Form.styled";
 import BGRegister from '../../images/BGRegister.jpg'
@@ -17,11 +17,8 @@ border-radius: 10px;
 display: flex;
 flex-direction:column;
 `
-export const Fields = styled(TextField)`
+export const Field = styled(FormControl)`
 margin-bottom:10px;
-`
-export const PasswordField = styled(FormControl)`
-margin:0;
 `
 export const Btn = styled(BtnSubmitForm)`
 width: 30%;

@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
 import { Navigation } from 'components/Navigation/Navigation';
 import { AuthNav } from 'components/AuthNavigation/AuthNavigation';
 import { UserMenu } from 'components/UserMenu/UserMenu';
-import { AppContainer } from './AppBar.styled';
+import { AppContainer, Bar } from './AppBar.styled';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/authSlice';
 
@@ -12,13 +11,13 @@ export default function MenuAppBar () {
   
   return (
     <>
-      <AppBar position="static">
+      <Bar position="static">
         <AppContainer>
           <Navigation/>
           {!isLoggedIn ? <AuthNav />:
           <UserMenu/>}
         </AppContainer>
-      </AppBar>
+      </Bar>
       <Outlet />
     </>
 

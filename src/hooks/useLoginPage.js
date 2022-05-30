@@ -3,43 +3,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from 'redux/authOperations';
 import { getError, getLoading } from 'redux/authSlice';
 import { errorRegistration } from 'utils/notification'; 
+import { useForm } from "react-hook-form";
+
 export const useLoginPage = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const error = useSelector(getError);
   const loading = useSelector(getLoading);
- 
-
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    defaultValues: {
+            email:'',
+            password:''
+        }
+  });
+  
   useEffect(() => {
     if (error) {
       errorRegistration(error);
     };
   }, [error]);
   
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
-    const handleClickShowPassword = () => {
+  const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(login({  email, password }));
-    setEmail('');
-    setPassword('');
-    }; 
-    return{ email, showPassword, password, loading, handleChange, handleClickShowPassword, handleMouseDownPassword, handleSubmit}
+  
+  const onSubmit = ({ email, password }) => {
+    dispatch(login({ email, password }));
+    reset()
+
+  };
+  
+  return {register, handleSubmit, errors, showPassword,  loading,  handleClickShowPassword, handleMouseDownPassword, onSubmit}
 }

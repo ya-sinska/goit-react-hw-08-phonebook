@@ -5,12 +5,15 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import {RedisterForm,Box,TitleText, FormTitle, LogIcon, Fields, PasswordField, Btn, FormContainer} from '../RegisterPage/RegisterPage.styled'
+import {RedisterForm,Box,TitleText, FormTitle, LogIcon, Field, Btn, FormContainer} from '../RegisterPage/RegisterPage.styled'
 import { SteledImage } from './LoginPage.styled';
 import { useLoginPage } from 'hooks/useLoginPage';
+import { Error } from 'components/Form/Form.styled';
 
-export default function LoginPage () {
-  const { email, showPassword, password, loading, handleChange, handleClickShowPassword, handleMouseDownPassword, handleSubmit } = useLoginPage();
+const emailRegExp = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
+
+export default function LoginPage() {
+  const {register, handleSubmit, errors, showPassword,  loading,  handleClickShowPassword, handleMouseDownPassword, onSubmit} = useLoginPage();
 
   return (
     <FormContainer>
@@ -22,24 +25,34 @@ export default function LoginPage () {
         </LogIcon>
         <TitleText>Log In</TitleText>
       </FormTitle>
-      <RedisterForm onSubmit={handleSubmit} autoComplete="off">
-          <Fields
-              id="email"
-              label="Email"
-              variant="outlined"
-              type="email"
-              multiline
-              name="email"
-              value={email}
-              onChange={handleChange}/>
-            <PasswordField sx={{ m: 1}} variant="outlined">
+        <RedisterForm
+          onSubmit={handleSubmit(onSubmit)}
+          autoComplete="off"
+        >
+          <Field sx={{ m: 1}} variant="outlined">
+             <InputLabel htmlFor="email">Email</InputLabel>
+                <OutlinedInput
+                  {...register("email", {
+                  required: "This is required",
+                  pattern: {
+                    value: emailRegExp,
+                    message: "Use email correct format"
+                  }
+                  })}
+                  id="email"
+                  type='email'
+                  defaultValue=""
+                  label="Email"
+                />
+            </Field >          
+            {errors.email&&<Error>{errors.email?.message }</Error> }
+            <Field sx={{ m: 1}} variant="outlined">
                 <InputLabel htmlFor="password">Password</InputLabel>
-                    <OutlinedInput
+                      <OutlinedInput
+                        {...register("password", { required:"This is required"})}
                         id="password"
-                        type={showPassword ? 'text' : 'password'}
-                        value={password}
-                        name="password"              
-                        onChange={handleChange}
+                        type={showPassword ? 'text' : 'password'} 
+                        defaultValue=""
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -54,7 +67,8 @@ export default function LoginPage () {
                         }
                         label="Password"
                     />
-              </PasswordField>
+          </Field>
+          {errors.password&&<Error>{errors.password?.message }</Error> }
         <Btn disabled={loading} variant="contained" type="submit">LogIn</Btn>
       </RedisterForm>
       </Box>
