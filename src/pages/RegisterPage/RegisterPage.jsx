@@ -9,7 +9,9 @@ import {RedisterForm,Box,SteledImage,TitleText, FormTitle, LogIcon, Field, Btn, 
 import { useRegisterPage } from 'hooks/useRegisterPage';
 import { Error } from 'components/Form/Form.styled';
 
+const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 const emailRegExp = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
+const passwordRegExp = /^[^\s]+(?:$|.*[^\s]+$)/;
 
 export default function RegisterPage() {
   const {formRegister, handleSubmit, errors, showPassword, loading, onSubmit, handleClickShowPassword, handleMouseDownPassword} = useRegisterPage();
@@ -28,7 +30,11 @@ export default function RegisterPage() {
              <InputLabel htmlFor="name">Name</InputLabel>
                 <OutlinedInput
                  {...formRegister("name", {
-                  required: "This is required",
+                   required: "This is required",
+                   pattern: {
+                    value: nameRegExp,
+                    message: "Use only text"
+                  }
                  })}
                   id="name"
                   type='text'
@@ -57,7 +63,13 @@ export default function RegisterPage() {
             <Field sx={{ m: 1}} variant="outlined">
                 <InputLabel htmlFor="password">Password</InputLabel>
                       <OutlinedInput
-                        {...formRegister("password", { required:"This is required"})}
+              {...formRegister("password", {
+                required: "This is required",
+                pattern: {
+                    value: passwordRegExp,
+                    message: "Can't use spaces"
+                  }
+              })}
                         id="password"
                         type={showPassword ? 'text' : 'password'} 
                         defaultValue=""

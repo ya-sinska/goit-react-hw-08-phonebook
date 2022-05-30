@@ -11,7 +11,7 @@ import { useLoginPage } from 'hooks/useLoginPage';
 import { Error } from 'components/Form/Form.styled';
 
 const emailRegExp = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
-
+const passwordRegExp = /^[^\s]+(?:$|.*[^\s]+$)/;
 export default function LoginPage() {
   const {register, handleSubmit, errors, showPassword,  loading,  handleClickShowPassword, handleMouseDownPassword, onSubmit} = useLoginPage();
 
@@ -49,7 +49,13 @@ export default function LoginPage() {
             <Field sx={{ m: 1}} variant="outlined">
                 <InputLabel htmlFor="password">Password</InputLabel>
                       <OutlinedInput
-                        {...register("password", { required:"This is required"})}
+              {...register("password", {
+                required: "This is required",
+                pattern: {
+                    value: passwordRegExp,
+                    message: "Can't use spaces"
+                  }
+              })}
                         id="password"
                         type={showPassword ? 'text' : 'password'} 
                         defaultValue=""

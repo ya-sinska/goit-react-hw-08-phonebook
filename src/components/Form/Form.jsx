@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { PaperForm, InputField, Label, Error, BtnSubmitForm } from './Form.styled'
 // Patterns
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+const phoneRegExp = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/;
 const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 
 // Component Forma
@@ -21,8 +21,8 @@ export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, conta
                 {...register("name", {
                     required: "This is required",
                     minLength: {
-                        value: 1,
-                        message: "Min length is 5 symbols",
+                        value: 3,
+                        message: "Min length is 3 symbols",
                     },
                     pattern: {
                         value: nameRegExp,
@@ -39,13 +39,17 @@ export const Forma = ({ btnText, register, handleSubmit, errors, onSubmit, conta
                 defaultValue={contact ? (contact.number) : ''}
                 {...register("number", {
                     required: "This is required",
+                    minLength: {
+                        value: 5,
+                        message: "Min length is 5 symbols",
+                    },
                     maxLength: {
-                        value: 13,
-                        message: "Max length is 13 symbols"
+                        value: 20,
+                        message: "Max length is 20 symbols"
                     },
                     pattern: {
                         value: phoneRegExp,
-                        message: "Use only numbers"
+                        message: "Use phone number"
                     }
                 })}
                 placeholder="+38(000)000-00-00"

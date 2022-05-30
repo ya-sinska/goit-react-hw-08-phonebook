@@ -32,8 +32,8 @@ export const useLoginPage = () => {
   };
   
   const onSubmit = ({ email, password }) => {
-    dispatch(login({ email, password }));
-    reset()
+    dispatch(login({ email, password}));
+    reset();
 
   };
   
