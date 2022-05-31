@@ -22,7 +22,7 @@ export const useContacts =  () => {
                 filteredContacts: selectFilteredContacts(result, filter)
             }
         },
-        refetchOnMountOrArgChange:true
+        // refetchOnMountOrArgChange:true
     }); 
     return { filteredContacts, isLoading, isSuccess };
 }
