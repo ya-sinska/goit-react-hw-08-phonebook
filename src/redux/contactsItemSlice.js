@@ -28,6 +28,7 @@ export const contactsItemApi = createApi({
         url: '/contacts',
         method: 'get'
       }),
+        keepUnusedDataFor: 3,
         providesTags:['Items'],
     }),
     addContacts: builder.mutation({
