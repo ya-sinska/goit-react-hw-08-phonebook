@@ -15,7 +15,7 @@ export const useContacts =  () => {
                         .includes(filter.toLowerCase())) ?? []);
             })
     }, []);
-    const { filteredContacts, isLoading, isSuccess, refetch } =  useGetContactsQuery(undefined, {
+    const { filteredContacts, isLoading, isSuccess } =  useGetContactsQuery(undefined, {
         selectFromResult(result) {
             return {
                 ...result,
@@ -24,5 +24,5 @@ export const useContacts =  () => {
         },
         refetchOnMountOrArgChange:true
     }); 
-    return { filteredContacts, isLoading, isSuccess, refetch };
+    return { filteredContacts, isLoading, isSuccess };
 }

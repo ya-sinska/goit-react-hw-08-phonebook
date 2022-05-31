@@ -5,13 +5,10 @@ import { useContacts } from 'hooks';
 import Skeleton from '@mui/material/Skeleton';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import { useEffect } from 'react';
+
 
 export const Contacts = () => {
-    const { filteredContacts, isLoading, isSuccess, refetch } = useContacts.useContacts();
-    // useEffect(() => {
-    //     refetch();
-    // }, [refetch])
+    const { filteredContacts, isLoading, isSuccess} = useContacts.useContacts();
     
     return (
         <PaperBoxContacts elevation={3}>
