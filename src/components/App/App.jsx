@@ -31,7 +31,7 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<MenuAppBar/>}>
               <Route index element={<HomePage />} />
-              <Route path="contacts" element={<PrivatRoute>{<ContactsPage />}</PrivatRoute> } />
+              <Route path="contacts" element={<PrivatRoute>{<ContactsPage />}</PrivatRoute>}/>
               <Route path="register" element={<PublicRoute restricted>{<RegisterPage />}</PublicRoute>} />
               <Route path="login" element={<PublicRoute restricted>{<LoginPage/>}</PublicRoute>}/>
             </Route>

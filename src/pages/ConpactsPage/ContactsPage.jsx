@@ -14,7 +14,12 @@ export default function ContactsPage () {
                 <Filter />
             </Box>
             <Grid>
-                <Forma btnText='Add contact' register={register} handleSubmit={handleSubmit} errors={errors} onSubmit={onSubmit} isLoading={isLoading}/>
+                <Forma btnText='Add contact'
+                    register={register}
+                    handleSubmit={handleSubmit}
+                    errors={errors}
+                    onSubmit={onSubmit}
+                    isLoading={isLoading} />
                 <Contacts />
             </Grid>
         </Container>

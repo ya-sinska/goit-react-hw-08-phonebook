@@ -2,11 +2,11 @@ import { useGetContactsQuery } from 'redux/contactsItemSlice';
 import {  contactsFilterSlice } from '../redux'
 import { useSelector } from 'react-redux'
 import { createSelector } from '@reduxjs/toolkit';
-import * as React from 'react';
+import {useMemo} from 'react';
 
-export const useContacts = () => {
+export const useContacts =  () => {
     const filter = useSelector(contactsFilterSlice.getFilterValue);
-    const selectFilteredContacts = React.useMemo(() => {
+    const selectFilteredContacts = useMemo(() => {
         return createSelector([responce => responce.data, (_, filter) => filter],
             (contacts, filter) => {
                 return (contacts?.filter(
@@ -15,12 +15,14 @@ export const useContacts = () => {
                         .includes(filter.toLowerCase())) ?? []);
             })
     }, []);
-    return useGetContactsQuery(undefined, {
+    const { filteredContacts, isLoading, isSuccess, refetch } =  useGetContactsQuery(undefined, {
         selectFromResult(result) {
             return {
                 ...result,
                 filteredContacts: selectFilteredContacts(result, filter)
             }
-        }
-    });    
+        },
+        refetchOnMountOrArgChange:true
+    }); 
+    return { filteredContacts, isLoading, isSuccess, refetch };
 }
